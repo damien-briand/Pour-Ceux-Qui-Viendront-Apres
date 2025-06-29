@@ -1,0 +1,571 @@
+openapi: 3.0.0
+info:
+  title: Gestion de Projet API
+  version: 1.0.0
+  description: Ce projet est une API de gestion de projet qui permet de gérer les employés, les équipes, les projets et les tâches. L'API permet de récupérer, ajouter, modifier et supprimer des données.Cette API est un MOCK pour un futur outil de gestion de projet pour une entreprise de développement informatique.
+  contact:
+    name: Damien BRIAND
+    email: briand.damien@etu.univ-grenoble-alpes.fr
+servers:
+- url: https://localhost:8000/
+paths:
+  /batiment:
+    get:
+      tags:
+        - Batiment
+      summary: Récupérer tous les bâtiments
+      responses:
+        '200':
+          description: Liste des bâtiments
+    post:
+      tags:
+        - Batiment
+      summary: Ajouter un nouveau bâtiment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Batiment'
+      responses:
+        '201':
+          description: Bâtiment ajouté
+  /batiment/{id_batiment}:
+    get:
+      tags:
+        - Batiment
+      summary: Récupérer un bâtiment par ID
+      parameters:
+        - in: path
+          name: id_batiment
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails du bâtiment
+        '404':
+          description: Bâtiment non trouvé
+    put:
+      tags:
+        - Batiment
+      summary: Mettre à jour un bâtiment
+      parameters:
+        - in: path
+          name: id_batiment
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Batiment'
+      responses:
+        '200':
+          description: Bâtiment mis à jour
+        '404':
+          description: Bâtiment non trouvé
+    delete:
+      tags:
+        - Batiment
+      summary: Supprimer un bâtiment
+      parameters:
+        - in: path
+          name: id_batiment
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Bâtiment supprimé
+        '404':
+          description: Bâtiment non trouvé
+  /equipe:
+    get:
+      tags:
+        - Team
+      summary: Récupérer toutes les équipes
+      responses:
+        '200':
+          description: Liste des équipes
+    post:
+      tags:
+        - Team
+      summary: Ajouter une nouvelle équipe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+      responses:
+        '201':
+          description: Équipe ajoutée
+  /equipe/{id_team}:
+    get:
+      tags:
+        - Team
+      summary: Récupérer une équipe par ID
+      parameters:
+        - in: path
+          name: id_team
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails de l'équipe
+        '404':
+          description: Équipe non trouvée
+    put:
+      tags:
+        - Team
+      summary: Mettre à jour une équipe
+      parameters:
+        - in: path
+          name: id_team
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+      responses:
+        '200':
+          description: Équipe mise à jour
+        '404':
+          description: Équipe non trouvée
+    delete:
+      tags:
+        - Team
+      summary: Supprimer une équipe
+      parameters:
+        - in: path
+          name: id_team
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Équipe supprimée
+        '404':
+          description: Équipe non trouvée
+  /equipe/{id_team}/employees:
+    post:
+      tags:
+        - Team
+      summary: Ajouter un employé à une équipe
+      parameters:
+        - in: path
+          name: id_team
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                employeeId:
+                  type: integer
+      responses:
+        '200':
+          description: Employé ajouté à l'équipe
+        '404':
+          description: Équipe ou employé non trouvé
+  /equipe/{id_team}/employees/{employeeId}:
+    delete:
+      tags:
+        - Team
+      summary: Supprimer un employé d'une équipe
+      parameters:
+        - in: path
+          name: id_team
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: employeeId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Employé supprimé de l'équipe
+        '404':
+          description: Équipe ou employé non trouvé
+  /equipe/batiment/{batiment}:
+    get:
+      tags:
+        - Team
+      summary: Récupérer les équipes par bâtiment
+      parameters:
+        - in: path
+          name: batiment
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Liste des équipes par bâtiment
+        '404':
+          description: Aucune équipe trouvée pour ce bâtiment
+  /employe:
+    get:
+      tags:
+        - Employe
+      summary: Récupérer tous les employés
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+        - in: query
+          name: attribut
+          schema:
+            type: string
+        - in: query
+          name: search
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Liste des employés
+    post:
+      tags:
+        - Employe
+      summary: Ajouter un nouvel employé
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employe'
+      responses:
+        '201':
+          description: Employé ajouté
+  /employe/{id}:
+    put:
+      tags:
+        - Employe
+      summary: Mettre à jour un employé
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employe'
+      responses:
+        '200':
+          description: Employé mis à jour
+        '404':
+          description: Employé non trouvé
+    delete:
+      tags:
+        - Employe
+      summary: Supprimer un employé
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Employé supprimé
+        '404':
+          description: Employé non trouvé
+  /project:
+    get:
+      tags:
+        - Project
+      summary: Récupérer tous les projets
+      responses:
+        '200':
+          description: Liste des projets
+    post:
+      tags:
+        - Project
+      summary: Ajouter un nouveau projet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '201':
+          description: Projet ajouté
+  /project/{id_project}:
+    get:
+      tags:
+        - Project
+      summary: Récupérer un projet par ID
+      parameters:
+        - in: path
+          name: id_project
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails du projet
+        '404':
+          description: Projet non trouvé
+    put:
+      tags:
+        - Project
+      summary: Mettre à jour un projet
+      parameters:
+        - in: path
+          name: id_project
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '200':
+          description: Projet mis à jour
+        '404':
+          description: Projet non trouvé
+    delete:
+      tags:
+        - Project
+      summary: Supprimer un projet
+      parameters:
+        - in: path
+          name: id_project
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Projet supprimé
+        '404':
+          description: Projet non trouvé
+  /project/{id_project}/members:
+    post:
+      tags:
+        - Project
+      summary: Ajouter un membre à un projet
+      parameters:
+        - in: path
+          name: id_project
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                employeeId:
+                  type: integer
+                role:
+                  type: string
+      responses:
+        '200':
+          description: Membre ajouté au projet
+        '404':
+          description: Projet ou employé non trouvé
+  /project/{id_project}/members/{employeeId}:
+    delete:
+      tags:
+        - Project
+      summary: Supprimer un membre d'un projet
+      parameters:
+        - in: path
+          name: id_project
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: employeeId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Membre supprimé du projet
+        '404':
+          description: Projet ou employé non trouvé
+  /task:
+    get:
+      tags:
+        - Task
+      summary: Récupérer toutes les tâches
+      responses:
+        '200':
+          description: Liste des tâches
+    post:
+      tags:
+        - Task
+      summary: Ajouter une nouvelle tâche
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '201':
+          description: Tâche ajoutée
+  /task/{id_task}:
+    get:
+      tags:
+        - Task
+      summary: Récupérer une tâche par ID
+      parameters:
+        - in: path
+          name: id_task
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails de la tâche
+        '404':
+          description: Tâche non trouvée
+    put:
+      tags:
+        - Task
+      summary: Mettre à jour une tâche
+      parameters:
+        - in: path
+          name: id_task
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: Tâche mise à jour
+        '404':
+          description: Tâche non trouvée
+    delete:
+      tags:
+        - Task
+      summary: Supprimer une tâche
+      parameters:
+        - in: path
+          name: id_task
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Tâche supprimée
+        '404':
+          description: Tâche non trouvée
+  /task/project/{projectId}:
+    get:
+      tags:
+        - Task
+      summary: Récupérer les tâches par projet
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Liste des tâches par projet
+        '404':
+          description: Aucune tâche trouvée pour ce projet
+components:
+  schemas:
+    Batiment:
+      type: object
+      properties:
+        id_batiment:
+          type: integer
+        pole:
+          type: string
+    Team:
+      type: object
+      properties:
+        id_team:
+          type: integer
+        team_name:
+          type: string
+        employees:
+          type: array
+          items:
+            type: integer
+        batiment:
+          type: string
+    Employe:
+      type: object
+      properties:
+        id:
+          type: integer
+        nom:
+          type: string
+        prenom:
+          type: string
+        email:
+          type: string
+        poste:
+          type: string
+    Project:
+      type: object
+      properties:
+        id_project:
+          type: integer
+        project_name:
+          type: string
+        description:
+          type: string
+        membres:
+          type: array
+          items:
+            type: object
+            properties:
+              employeeId:
+                type: integer
+              role:
+                type: string
+    Task:
+      type: object
+      properties:
+        id_task:
+          type: integer
+        id_project:
+          type: integer
+        name:
+          type: string
+        date_end:
+          type: string
+        status:
+          type: string
+          enum:
+            - FIN
+            - EN COURS
+            - INACTIF

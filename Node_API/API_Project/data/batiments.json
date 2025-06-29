@@ -1,0 +1,18 @@
+[
+	{
+		"id_bat": 300,
+		"pole": "FAB"
+	},
+	{
+		"id_bat": 400,
+		"pole": "DTIT"
+	},
+	{
+		"id_bat": 500,
+		"pole": "ADMIN"
+	},
+	{
+		"id_bat": 600,
+		"pole": "OPS"
+	}
+]

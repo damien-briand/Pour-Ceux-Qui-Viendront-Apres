@@ -1,0 +1,351 @@
+[
+  {
+    "id_team": 1,
+    "team_name": "IT",
+    "batiment": "DTIT",
+    "employees": [
+      {
+        "employeeId": 100
+      },
+      {
+        "employeeId": 101
+      },
+      {
+        "employeeId": 102
+      },
+      {
+        "employeeId": 103
+      },
+      {
+        "employeeId": 104
+      },
+      {
+        "employeeId": 105
+      },
+      {
+        "employeeId": 106
+      },
+      {
+        "employeeId": 107
+      },
+      {
+        "employeeId": 108
+      },
+      {
+        "employeeId": 109
+      },
+      {
+        "employeeId": 110
+      }
+    ]
+  },
+  {
+    "id_team": 2,
+    "team_name": "MES",
+    "batiment": "DTIT",  
+    "employees": [
+      {
+        "employeeId": 111
+      },
+      {
+        "employeeId": 112
+      },
+      {
+        "employeeId": 113
+      },
+      {
+        "employeeId": 114
+      },
+      {
+        "employeeId": 115
+      },
+      {
+        "employeeId": 116
+      },
+      {
+        "employeeId": 117
+      },
+      {
+        "employeeId": 118
+      },
+      {
+        "employeeId": 119
+      },
+      {
+        "employeeId": 120
+      },
+      {
+        "employeeId": 121
+      }
+    ]
+  },
+  {
+    "id_team": 3,
+    "team_name": "ARCHI",
+    "batiment": "FAB",
+    "employees": [
+      {
+        "employeeId": 122
+      },
+      {
+        "employeeId": 123
+      },
+      {
+        "employeeId": 124
+      },
+      {
+        "employeeId": 125
+      },
+      {
+        "employeeId": 126
+      },
+      {
+        "employeeId": 127
+      },
+      {
+        "employeeId": 128
+      },
+      {
+        "employeeId": 129
+      },
+      {
+        "employeeId": 130
+      },
+      {
+        "employeeId": 131
+      },
+      {
+        "employeeId": 132
+      }
+    ]
+  },
+  {
+    "id_team": 4,
+    "team_name": "DB",
+    "batiment": "ADMIN",
+    "employees": [
+      {
+        "employeeId": 133
+      },
+      {
+        "employeeId": 134
+      },
+      {
+        "employeeId": 135
+      },
+      {
+        "employeeId": 136
+      },
+      {
+        "employeeId": 137
+      },
+      {
+        "employeeId": 138
+      },
+      {
+        "employeeId": 139
+      },
+      {
+        "employeeId": 140
+      },
+      {
+        "employeeId": 141
+      },
+      {
+        "employeeId": 142
+      },
+      {
+        "employeeId": 143
+      }
+    ]
+  },
+  {
+    "id_team": 5,
+    "team_name": "INFRA",
+    "batiment": "ADMIN",
+    "employees": [
+      {
+        "employeeId": 144
+      },
+      {
+        "employeeId": 145
+      },
+      {
+        "employeeId": 146
+      },
+      {
+        "employeeId": 147
+      },
+      {
+        "employeeId": 148
+      },
+      {
+        "employeeId": 149
+      },
+      {
+        "employeeId": 150
+      },
+      {
+        "employeeId": 151
+      },
+      {
+        "employeeId": 152
+      },
+      {
+        "employeeId": 153
+      },
+      {
+        "employeeId": 154
+      }
+    ]
+  },
+  {
+    "id_team": 6,
+    "team_name": "ACCES",
+    "batiment": "OPS",
+    "employees": [
+      {
+        "employeeId": 155
+      },
+      {
+        "employeeId": 156
+      },
+      {
+        "employeeId": 157
+      },
+      {
+        "employeeId": 158
+      },
+      {
+        "employeeId": 159
+      },
+      {
+        "employeeId": 160
+      },
+      {
+        "employeeId": 161
+      },
+      {
+        "employeeId": 162
+      },
+      {
+        "employeeId": 163
+      },
+      {
+        "employeeId": 164
+      },
+      {
+        "employeeId": 165
+      }
+    ]
+  },
+  {
+    "id_team": 7,
+    "team_name": "AUTOMATION",
+    "batiment": "FAB",
+    "employees": [
+      {
+        "employeeId": 166
+      },
+      {
+        "employeeId": 167
+      },
+      {
+        "employeeId": 168
+      },
+      {
+        "employeeId": 169
+      },
+      {
+        "employeeId": 170
+      },
+      {
+        "employeeId": 171
+      },
+      {
+        "employeeId": 172
+      },
+      {
+        "employeeId": 173
+      },
+      {
+        "employeeId": 174
+      },
+      {
+        "employeeId": 175
+      },
+      {
+        "employeeId": 176
+      },
+      {
+        "employeeId": 177
+      },
+      {
+        "employeeId": 178
+      },
+      {
+        "employeeId": 179
+      },
+      {
+        "employeeId": 180
+      },
+      {
+        "employeeId": 181
+      },
+      {
+        "employeeId": 182
+      },
+      {
+        "employeeId": 183
+      },
+      {
+        "employeeId": 184
+      },
+      {
+        "employeeId": 185
+      },
+      {
+        "employeeId": 186
+      },
+      {
+        "employeeId": 187
+      },
+      {
+        "employeeId": 188
+      },
+      {
+        "employeeId": 189
+      },
+      {
+        "employeeId": 190
+      },
+      {
+        "employeeId": 191
+      },
+      {
+        "employeeId": 192
+      },
+      {
+        "employeeId": 193
+      },
+      {
+        "employeeId": 194
+      },
+      {
+        "employeeId": 195
+      },
+      {
+        "employeeId": 196
+      },
+      {
+        "employeeId": 197
+      },
+      {
+        "employeeId": 198
+      },
+      {
+        "employeeId": 199
+      }
+    ]
+  }
+]

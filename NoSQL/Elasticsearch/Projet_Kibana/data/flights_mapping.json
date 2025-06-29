@@ -1,0 +1,76 @@
+{
+  "properties": {
+    "FlightNum": {
+      "type": "keyword"
+    },
+    "DestCountry": {
+      "type": "keyword"
+    },
+    "OriginWeather": {
+      "type": "keyword"
+    },
+    "OriginCityName": {
+      "type": "keyword"
+    },
+    "AvgTicketPrice": {
+      "type": "float"
+    },
+    "FlightDelay": {
+      "type": "boolean"
+    },
+    "DestWeather": {
+      "type": "keyword"
+    },
+    "Dest": {
+      "type": "keyword"
+    },
+    "FlightDelayType": {
+      "type": "keyword"
+    },
+    "OriginCountry": {
+      "type": "keyword"
+    },
+    "DistanceKilometers": {
+      "type": "float"
+    },
+    "timestamp": {
+      "type": "date"
+    },
+    "DestLocation": {
+      "type": "geo_point"
+    },
+    "DestAirportID": {
+      "type": "keyword"
+    },
+    "Carrier": {
+      "type": "keyword"
+    },
+    "Cancelled": {
+      "type": "boolean"
+    },
+    "FlightTimeMin": {
+      "type": "float"
+    },
+    "Origin": {
+      "type": "keyword"
+    },
+    "OriginLocation": {
+      "type": "geo_point"
+    },
+    "DestRegion": {
+      "type": "keyword"
+    },
+    "OriginAirportID": {
+      "type": "keyword"
+    },
+    "OriginRegion": {
+      "type": "keyword"
+    },
+    "DestCityName": {
+      "type": "keyword"
+    },
+    "FlightDelayMin": {
+      "type": "float"
+    }
+  }
+}

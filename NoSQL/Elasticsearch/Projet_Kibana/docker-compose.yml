@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  es001:
+    image: elasticsearch:8.11.3
+    container_name: conteneur_es001
+    environment:
+      - node.name=node_es001
+      - cluster.name=cluster_briandd
+      - cluster.initial_master_nodes=node_es001,node_es002
+      - discovery.seed_hosts=conteneur_es002
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+
+  es002:
+    image: elasticsearch:8.11.3
+    container_name: conteneur_es002
+    environment:
+      - node.name=node_es002
+      - cluster.name=cluster_briandd
+      - cluster.initial_master_nodes=node_es001,node_es002
+      - discovery.seed_hosts=conteneur_es001
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9201:9200
+
+  kibana000:
+    image: kibana:8.11.3
+    container_name: conteneur_kibana000
+    depends_on:
+      - es001
+      - es002
+    environment:
+      - SERVERNAME=kibana_local
+      - ELASTICSEARCH_HOSTS=http://conteneur_es001:9200
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 5601:5601

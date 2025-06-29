@@ -1,0 +1,175 @@
+http://localhost:5601
+
+curl localhost:9200/sample_flights_briandd \
+ -X PUT \
+ -H "Content-Type: application/json" \
+ -d @flights_mapping.json
+
+curl localhost:9200/sample_flights_briandd/_mapping?pretty
+
+curl localhost:9200/sample_flights_briandd/_bulk \
+  -X POST \
+  -H "Content-Type: application/json" \
+  --data-binary @sample_flights_data.json
+
+Quel est le nom de la compagnie aérienne qui s’est occupée du vol numéro “U95ZN76” ?
+GET /sample_flights_briandd/_search
+{
+  "query": {
+    "term": {
+      "FlightNum": "U95ZN76"
+    }
+  },
+  "_source": ["Carrier"]
+}
+
+Combien de vols avaient un temps ensoleillé au départ et à l’arrivée (“Sunny”), 
+mais ont quand même eu un retard lié à la météo ?
+GET /sample_flights_briandd/_count
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "term": { "OriginWeather": "Sunny" } },
+        { "term": { "DestWeather": "Sunny" } },
+        { "term": { "FlightDelayType": "Weather Delay" } }
+      ]
+    }
+  }
+}
+
+Quels sont les numéros des 3 vols qui ont fait un trajet de la France aux USA 
+entre le 8 et le 10 janvier 2024 (inclus) ?
+GET /sample_flights_briandd/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "term": { "OriginCountry": "FR" } },
+        { "term": { "DestCountry": "US" } },
+        {
+          "range": {
+            "timestamp": {
+              "gte": "2024-01-08",
+              "lte": "2024-01-10"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "sort": [
+    { "timestamp": "asc" }
+  ],
+  "_source": ["FlightNum"],
+  "size": 3
+}
+
+Quels sont les numéros et les villes de destination des 5 vols des compagnies 
+autres que “Logstash Airways” qui ont fait France - Canada sur toute la période des données ?
+GET /sample_flights_briandd/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "term": { "OriginCountry": "FR" } },
+        { "term": { "DestCountry": "CA" } }
+      ],
+      "must_not": {
+        "term": { "Carrier": "Logstash Airways" }
+      }
+    }
+  },
+  "_source": ["FlightNum", "DestCityName"],
+  "size": 5
+}
+
+Quels sont les numéros de vol et le nom de l’aéroport de départ des 2 vols 
+qui sont partis à moins de 50 km du 
+London Eye (Latitude = 51.5034 / Longitude = -0.1195) le 09/12/2023 entre 9H et 15H ?
+GET /sample_flights_briandd/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "geo_distance": {
+            "distance": "50km",
+            "OriginLocation": {
+              "lat": 51.5034,
+              "lon": -0.1195
+            }
+          }
+        },
+        {
+          "range": {
+            "timestamp": {
+              "gte": "2023-12-09T09:00:00",
+              "lte": "2023-12-09T15:00:00"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_source": ["FlightNum", "Origin"],
+  "size": 2
+}
+
+Quels sont les noms des 4 différentes compagnies aériennes présentes en base, 
+avec le nombre de vols par compagnie ?
+GET /sample_flights_briandd/_search
+{
+  "size": 0,
+  "aggs": {
+    "carriers": {
+      "terms": {
+        "field": "Carrier",
+        "size": 4
+      }
+    }
+  }
+}
+
+Quels sont les noms des 4 différentes villes de départ des vols qui décollent depuis l’Allemagne ?
+GET /sample_flights_briandd/_search
+{
+  "query": {
+    "match": {
+      "OriginCountry": "DE"
+    }
+  },
+  "size": 0,
+  "aggs": {
+    "originCities": {
+      "terms": {
+        "field": "OriginCityName",
+        "size": 4
+      }
+    }
+  }
+}
+
+Combien de vols correspondent aux 3 plages suivantes ?
+GET /sample_flights_briandd/_search
+{
+  "size": 0,
+  "aggs": {
+    "flight_delays": {
+      "range": {
+        "field": "FlightDelayMin",
+        "ranges": [
+          { "to": 1, "key": "Aucun retard" },
+          { "from": 1, "to": 60, "key": "Retard de [1, 60[ min" },
+          { "from": 60, "key": "Retard de 60 min ou plus" }
+        ]
+      }
+    }
+  }
+}
+
+
+
+
+
+
